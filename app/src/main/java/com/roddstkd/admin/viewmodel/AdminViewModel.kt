@@ -184,7 +184,7 @@ class AdminViewModel : ViewModel() {
                         notes = it.studentNotes
                     )
                 }
-                message = if (response.success) "Registrations loaded" else (response.message.ifBlank { "Failed" })
+                message = if (response.success) "Registrations loaded" else response.message.ifBlank { "Failed" }
             } catch (e: Exception) {
                 items = emptyList()
                 message = e.message ?: "Error"
@@ -221,16 +221,16 @@ class AdminViewModel : ViewModel() {
             loading = true
             try {
                 message = repo.updateStudentManagement(
-                    email,
-                    studentName,
-                    assignedClass,
-                    paymentStatus,
-                    amountPaid,
-                    currentBelt,
-                    testingFor,
-                    beltTestDate,
-                    beltInviteStatus,
-                    studentNotes
+                    email = email,
+                    studentName = studentName,
+                    assignedClass = assignedClass,
+                    paymentStatus = paymentStatus,
+                    amountPaid = amountPaid,
+                    currentBelt = currentBelt,
+                    testingFor = testingFor,
+                    beltTestDate = beltTestDate,
+                    beltInviteStatus = beltInviteStatus,
+                    studentNotes = studentNotes
                 ).message
             } catch (e: Exception) {
                 message = e.message ?: "Error"
@@ -255,7 +255,7 @@ class AdminViewModel : ViewModel() {
                         notes = it.notes
                     )
                 }
-                message = if (response.success) "Roster loaded" else (response.message.ifBlank { "Failed" })
+                message = if (response.success) "Roster loaded" else response.message.ifBlank { "Failed" }
             } catch (e: Exception) {
                 items = emptyList()
                 message = e.message ?: "Error"
@@ -283,7 +283,7 @@ class AdminViewModel : ViewModel() {
                         notes = it.studentNotes
                     )
                 }
-                message = if (response.success) "Belt testing loaded" else (response.message.ifBlank { "Failed" })
+                message = if (response.success) "Belt testing loaded" else response.message.ifBlank { "Failed" }
             } catch (e: Exception) {
                 items = emptyList()
                 message = e.message ?: "Error"
@@ -304,12 +304,12 @@ class AdminViewModel : ViewModel() {
             loading = true
             try {
                 message = repo.saveBeltTesting(
-                    rowNumber,
-                    currentBelt,
-                    testingFor,
-                    beltTestDate,
-                    beltInviteStatus,
-                    studentNotes
+                    rowNumber = rowNumber,
+                    currentBelt = currentBelt,
+                    testingFor = testingFor,
+                    beltTestDate = beltTestDate,
+                    beltInviteStatus = beltInviteStatus,
+                    studentNotes = studentNotes
                 ).message
             } catch (e: Exception) {
                 message = e.message ?: "Error"
