@@ -25,24 +25,12 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Show repo root
-        run: |
-          pwd
-          ls -la
-          echo "---- root build.gradle.kts ----"
-          cat build.gradle.kts || true
-          echo "---- settings.gradle.kts ----"
-          cat settings.gradle.kts || true
-          echo "---- app/build.gradle.kts ----"
-          cat app/build.gradle.kts || true
-
       - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace --info
+        run: ./gradlew assembleDebug --stacktrace --warning-mode all
 
-      - name: Show build outputs
+      - name: Show APK files
         if: always()
-        run: |
-          find app/build -type f | sort || true
+        run: find app/build -type f | sort || true
 
       - name: Upload APK artifact
         if: success()
