@@ -26,49 +26,77 @@ class AdminRepository {
     suspend fun getPaymentDueSoon(club: String, month: String): PaymentListResponse {
         return api.postPaymentList(
             paymentUrl,
-            GenericRequest(action = "getDueSoon", club = club, month = month)
+            GenericRequest(
+                action = "getDueSoon",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun getWhoOwes(club: String, month: String): PaymentListResponse {
         return api.postPaymentList(
             paymentUrl,
-            GenericRequest(action = "getWhoOwes", club = club, month = month)
+            GenericRequest(
+                action = "getWhoOwes",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun getReminderNoticeList(club: String, month: String): PaymentListResponse {
         return api.postPaymentList(
             paymentUrl,
-            GenericRequest(action = "getReminderNoticeList", club = club, month = month)
+            GenericRequest(
+                action = "getReminderNoticeList",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun getOverdueNoticeList(club: String, month: String): PaymentListResponse {
         return api.postPaymentList(
             paymentUrl,
-            GenericRequest(action = "getOverdueNoticeList", club = club, month = month)
+            GenericRequest(
+                action = "getOverdueNoticeList",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun sendReminderEmail(club: String, month: String): ApiActionResponse {
         return api.postAction(
             paymentUrl,
-            GenericRequest(action = "sendReminderEmail", club = club, month = month)
+            GenericRequest(
+                action = "sendReminderEmail",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun sendDueSoonEmail(club: String, month: String): ApiActionResponse {
         return api.postAction(
             paymentUrl,
-            GenericRequest(action = "sendDueSoonEmail", club = club, month = month)
+            GenericRequest(
+                action = "sendDueSoonEmail",
+                club = club,
+                month = month
+            )
         )
     }
 
     suspend fun sendOverdueEmail(club: String, month: String): ApiActionResponse {
         return api.postAction(
             paymentUrl,
-            GenericRequest(action = "sendOverdueEmail", club = club, month = month)
+            GenericRequest(
+                action = "sendOverdueEmail",
+                club = club,
+                month = month
+            )
         )
     }
 
