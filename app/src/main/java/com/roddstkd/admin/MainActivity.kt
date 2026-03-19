@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         val spinner = ProgressBar(this)
         loadingText = TextView(this).apply {
-            text = "Loading Rodd's TKD Admin..."
+            text = "Loading Rodds TKD Admin..."
             textSize = 18f
             setPadding(0, 30, 0, 0)
             setTextColor(0xFF111111.toInt())
@@ -81,8 +81,6 @@ class MainActivity : AppCompatActivity() {
         root.addView(progressBar)
 
         setContentView(root)
-
-        supportActionBar?.title = "Rodd's TKD Admin"
 
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
