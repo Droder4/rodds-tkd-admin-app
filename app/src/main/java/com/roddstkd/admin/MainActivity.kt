@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var splashOverlay: LinearLayout
     private lateinit var offlineOverlay: LinearLayout
-    private lateinit var bottomNav: LinearLayout
-    private var currentSection: String = "registrations"
 
     private val adminUrl =
         "https://script.google.com/macros/s/AKfycbzwB7Ow4FizQnCNTKXSDmLRBm4TVXqcqqoYH6ekk6V3iz7Miyvhj6UTQ-m77JI36-11Xw/exec?page=admin"
@@ -78,11 +76,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        bottomNav = createBottomNav()
-
         container.addView(progressBar)
         container.addView(webView)
-        container.addView(bottomNav)
 
         splashOverlay = createSplashOverlay()
         offlineOverlay = createOfflineOverlay()
@@ -189,7 +184,6 @@ class MainActivity : AppCompatActivity() {
                 text = "Retry"
                 setOnClickListener {
                     if (isOnline()) {
-                        visibility = View.VISIBLE
                         offlineOverlay.visibility = View.GONE
                         splashOverlay.visibility = View.VISIBLE
                         webView.loadUrl(adminUrl)
@@ -202,40 +196,6 @@ class MainActivity : AppCompatActivity() {
             addView(title)
             addView(message)
             addView(retry)
-        }
-    }
-
-    private fun createBottomNav(): LinearLayout {
-        return LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
-            setBackgroundColor(0xFF111111.toInt())
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(64)
-            )
-
-            addView(createNavButton("Registrations", "registrations"))
-            addView(createNavButton("Rosters", "rosters"))
-            addView(createNavButton("Belt Testing", "belt"))
-        }
-    }
-
-    private fun createNavButton(label: String, section: String): Button {
-        return Button(this).apply {
-            text = label
-            isAllCaps = false
-            setTextColor(0xFFFFFFFF.toInt())
-            setBackgroundColor(0x00000000)
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
-            setOnClickListener {
-                currentSection = section
-                if (webView.url == null) {
-                    if (isOnline()) webView.loadUrl(adminUrl) else showOffline()
-                } else {
-                    webView.evaluateJavascript("if (typeof showSection === 'function') { showSection('$section'); }", null)
-                }
-            }
         }
     }
 
@@ -275,7 +235,6 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = View.GONE
                 splashOverlay.visibility = View.GONE
                 offlineOverlay.visibility = View.GONE
-                webView.evaluateJavascript("if (typeof showSection === 'function') { showSection('$currentSection'); }", null)
             }
 
             override fun shouldOverrideUrlLoading(
